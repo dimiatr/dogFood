@@ -1,0 +1,28 @@
+.card {
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+    background-color: white;
+    color: #222;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.card__img {
+    height: 100px;
+    justify-self: center;
+}
+
+.card__btn {
+    border: none;
+    outline: none;
+    height: 30px;
+    background-color: darkslateblue;
+    color: white;
+    border-radius: 4px;
+}
+
+.card__btn:hover {
+    background-color: springgreen;
+    color: black;
+}
