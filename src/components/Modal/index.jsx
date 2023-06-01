@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './style.css';
 
-const Modal = ({active, setActive}) => {
+const Modal = ({active, setActive, setUser}) => {
     const [auth, setAuth] = useState(true);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -60,14 +60,20 @@ const Modal = ({active, setActive}) => {
                 let dataLog = await resLog.json() 
                 if(!data.err) {
                     localStorage.setItem('rockUser', dataLog.data.name);
+                    localStorage.setItem('rockToken', dataLog.token)
+                    localStorage.setItem('rockId', dataLog.data._id)
                     clearForm();
                     setActive(false)
+                    setUser( dataLog.data.name)
                 } 
             } else { 
                 if(!data.err) {
                 localStorage.setItem('rockUser', data.data.name);
+                localStorage.setItem('rockToken', data.token)
+                localStorage.setItem('rockId', data.data._id);
                 clearForm();
                 setActive(false);
+                setUser(data.data.name)
             }
         }
         }

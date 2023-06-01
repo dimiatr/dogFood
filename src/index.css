@@ -18,12 +18,25 @@ a {
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 20px;
-  padding: 30px 50px;
-  box-sizing: border-box;
+  /* padding: 30px 50px;
+  box-sizing: border-box; */
 }
 
 .container .search-block {
   grid-column-end: span 4;
+}
+
+#root {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+main {
+  padding: 30px 50px;
+  display: grid;
+  align-content: flex-start;
+  gap: 20px;
 }
 
 

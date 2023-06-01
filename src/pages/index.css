@@ -1,0 +1,30 @@
+
+.main__content {
+    display: flex;
+}
+
+.main__content_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__count {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 1px solid silver;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .main__count_min, .main__count_plus {
+    font-size: 24px;
+    margin: 0 5px;
+    color: gray;
+    padding: 3px;
+  }
+  
+  

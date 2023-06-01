@@ -1,12 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './style.css'
 
 const Search = ({arr, upd}) => {
     const [text, setText] = useState('');
-    const [qauntity, setQuantity] = useState(arr.length);
 
+    const [qauntity, setQuantity] = useState(arr.length);
     const [count, updateCount] = useState(0);
+
+    useEffect(() => {
+        if (text) {
+            let res = arr.filter(el => el.name.toLowerCase().includes(text.toLowerCase()));
+            upd(res);
+            setQuantity(res.length);
+        } else {
+            upd(arr);
+            setQuantity(arr.length);
+        }
+    }, [arr]);
 
     let n = 1;
     const click = () => {
