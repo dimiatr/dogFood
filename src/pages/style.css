@@ -1,0 +1,138 @@
+.main__container {
+  display: flex;
+}
+
+.main__content {
+  display: flex;
+}
+
+.img__product {
+  width: auto;
+  height: 520px;
+  border-radius: 5px;
+}
+
+.main__twoblock {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.h1 {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.h2 {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+button {
+  border: none;
+  outline: none;
+  height: 30px;
+  background-color: white;
+  color: darkblue;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: springgreen;
+  color: black;
+}
+
+.main__twoblocks {
+  margin: 15px 0;
+}
+
+.main__twoblock_count {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border: 1px solid silver;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.main__twoblock_countmin, .main__twoblock_countplus {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 100;
+  text-align: center;
+}
+
+.main__twoblock_counts {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.main__delivery, .main__quality {
+  background-color: silver;
+  color: darkblue;
+  padding: 20px;
+  width: 400px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.main__reviews {
+  display: flex;
+}
+
+.main__imgauthor {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+#for_imgReviews {
+  padding: 10px;
+}
+
+.main__reviews_content {
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (min-width: 720px) and (max-width:1350px) {
+
+.main__container {
+  flex-direction: column;
+}
+
+.main__review_content {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+}
+
+}
+
+@media (min-width: 320px) and (max-width:720px) {
+
+  .main__container {
+    flex-direction: column;
+  }
+
+  .main__content {
+    flex-direction: column;
+  }
+  
+  .main__review_content {
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+  }
+
+  .main__twoblock {
+    margin-left: 0;
+  }
+
+  .img__product {
+    width: auto;
+    height: 520px;
+  }
+}

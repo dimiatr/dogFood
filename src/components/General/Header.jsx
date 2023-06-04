@@ -1,14 +1,15 @@
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
 import { Folder2, Star, Cart4, PersonCircle, BoxArrowInRight } from "react-bootstrap-icons";
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext } from 'react';
+import Ctx from '../../context'
 
-
-const Header = ({ user, setModalActive, serverGoods,}) => {
+const Header = ({ user, setModalActive }) => {
     const [likeCnt, setLikeCnt] = useState(0);
     const [cartCnt, setCartCnt] = useState(0);
+    const { serverGoods } = useContext(Ctx);
 
-    useEffect(()=> {
+    useEffect(() => {
         setLikeCnt(serverGoods.filter(el => el.likes.includes(localStorage.getItem('rockId'))).length)
     }, [serverGoods])
 
@@ -35,7 +36,7 @@ const Header = ({ user, setModalActive, serverGoods,}) => {
                 <Link to="/profile" title='профиль'>
                     <PersonCircle />
                 </Link>
-              
+
             </>}
             {!user && <a href="" onClick={logIn} title='Войти'>
                 <BoxArrowInRight />

@@ -59,4 +59,11 @@ main {
    .container .search-block {
     grid-column-end: span 2;
   }
+
+  main {
+    padding: 20px 20px;
+    display: grid;
+    align-content: flex-start;
+    gap: 20px;
+  }
 }

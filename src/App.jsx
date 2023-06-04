@@ -49,7 +49,6 @@ const App = () => {
     }, [serverGoods]);
 
     useEffect(() => {
-        console.log('Change user');
         if (user) {
             setToken(localStorage.getItem('rockToken'));
             setUSerId(localStorage.getItem('rockId'))
@@ -61,28 +60,30 @@ const App = () => {
 
 
     return <>
-        <Ctx.Provider value={{ goods, }}>
-        </Ctx.Provider>
+        <Ctx.Provider value={{ goods,
+        serverGoods,
+        setServerGoods,
+        userId }}>
         <Header
             user={user}
             setModalActive={setModalActive}
-            serverGoods={serverGoods} />
+            />
         <main>
             <Search arr={serverGoods} upd={setGoods} />
             <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/catalog"
                     element={<Catalog goods={goods}
-                        setServerGoods={setServerGoods}
+                    setServerGoods={setServerGoods}
                     />} />
                 <Route path="/favorites"
                     element={<Favorites
                         goods={goods}
-                        userId={userId}
+                        // userId={userId}
                         setServerGoods={setServerGoods}
-                    />} />
+                        />} />
                 <Route path="/draft" element={<Draft />} />
-                <Route path="/product/:id" element={<Product goods={goods} setServerGoods={setServerGoods} />} />
+                <Route path="/product/:id" element={<Product/>} />
                 <Route path="/profile" element={<Profile user={user} setUser={setUser} color="yellow" />} />
             </Routes>
         </main>
@@ -91,7 +92,8 @@ const App = () => {
             active={modalActive}
             setActive={setModalActive}
             setUser={setUser}
-        />
+            />
+            </Ctx.Provider>
     </>
 }
 

@@ -1,13 +1,13 @@
-import  {useState} from 'react';
+import  {useState, useContext} from 'react';
 import "./style.css";
 import { Link } from "react-router-dom";
 import { ArrowThroughHeart, ArrowThroughHeartFill, Percent } from "react-bootstrap-icons";
+import Ctx from '../../context'
 
 
-
-const Card = ({ img, name, price, _id, discount, tags, likes, setServerGoods}) => {
+const Card = ({ img, name, price, _id, discount, tags, likes}) => {
     const [isLike, setIsLike] = useState(likes.includes(localStorage.getItem('rockId')));
-   
+    const {setServerGoods} = useContext(Ctx);
 
 
     const updLike = (e) => {
@@ -26,7 +26,6 @@ const Card = ({ img, name, price, _id, discount, tags, likes, setServerGoods}) =
             console.log(data);
             setServerGoods(old => {
                 const arr = old.map(el => el._id === _id ?data : el);
-                console.log(old);
                 return arr;
             });
         })
