@@ -1,4 +1,4 @@
-.modal-wrapper {
+.my-modal-wrapper {
     position: fixed;
     background-color: #fff9;
     top: 0;
@@ -11,7 +11,7 @@
     align-items: center;
 }
 
-.modal {
+.my-modal {
     max-width: calc(100% - 40px);
     max-height: calc(100% - 40px);
     width: 400px;
@@ -25,18 +25,18 @@
     align-items: center;
 }
 
-.btn {
+.mbtn {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.modal h3 {
+.my-modal h3 {
     margin-bottom: 20px;
 }
 
-form {
+.my-form {
     display: grid;
     gap: 20px;
 }
@@ -61,7 +61,7 @@ form {
     background-color: silver;
 }
 
-label {
+.my-label {
     display: grid;
     gap: 4px;
 }

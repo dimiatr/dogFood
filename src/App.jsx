@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from 'react-router-dom';
 import Ctx from './context';
-
+import cardsData from './assets/data.json'
+import Api from "./components/api";
 
 
 import { Header, Footer } from "./components/General";
@@ -14,7 +15,8 @@ import Catalog from './pages/Catalog';
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites";
-
+import Add from './pages/AddProduct';
+import Basket from "./pages/Basket";
 
 const App = () => {
 
@@ -22,25 +24,49 @@ const App = () => {
     const [token, setToken] = useState(localStorage.getItem('rockToken'));
     const [userId, setUSerId] = useState(localStorage.getItem('rockId'))
     const [serverGoods, setServerGoods] = useState([]);
-    const [goods, setGoods] = useState(serverGoods);
+    const [goods, setGoods] = useState([cardsData]);
+    const [news, setNews] = useState([]);
+    const [text, setText] = useState('');
+    const [api, setApi] = useState(new Api(token));
+    
+    let bStore = localStorage.getItem('rockBasket');
+    if (bStore) {
+        bStore = JSON.parse(bStore);
+    } else {
+        bStore = [];
+    }
+
+    const [basket, setBasket] = useState(bStore);
+
+    useEffect (() => {
+        localStorage.setItem('rockBasket', JSON.stringify(basket))
+    }, [basket])
+
+    useEffect(() => {
+        fetch('https://newsapi.org/v2/everything?q=животные&sources=lenta&apiKey=7f746aaad95346e4a79ca2674c0e179e')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setNews(data.articles)
+            })
+    }, [])
 
 
     const [modalActive, setModalActive] = useState(false)
 
     useEffect(() => {
-        if (token) {
-            fetch('https://api.react-learning.ru/products', {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-                .then(res => res.json())
+            setApi(new Api(token));
+    }, [token])
+
+    useEffect(() => {
+        if (api.token) {
+            api.getProduct()
                 .then(data => {
                     console.log(data);
                     setServerGoods(data.products);
                 })
         }
-    }, [token])
+    }, [api.token])
 
     useEffect(() => {
         if (!goods.length) {
@@ -58,42 +84,51 @@ const App = () => {
         } console.log('u', user);
     }, [user])
 
-
-    return <>
-        <Ctx.Provider value={{ goods,
+    const ctxVal = {
         serverGoods,
         setServerGoods,
-        userId }}>
-        <Header
-            user={user}
-            setModalActive={setModalActive}
+        userId,
+        goods,
+        setGoods,
+        news,
+        text,
+        setText,
+        userId,
+        token,
+        api,
+        basket,
+        setBasket
+    }
+
+    return <>
+        <Ctx.Provider value={ctxVal}>
+            <Header
+                user={user}
+                setModalActive={setModalActive}
             />
-        <main>
-            <Search arr={serverGoods} upd={setGoods} />
-            <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/catalog"
-                    element={<Catalog goods={goods}
-                    setServerGoods={setServerGoods}
-                    />} />
-                <Route path="/favorites"
-                    element={<Favorites
-                        goods={goods}
-                        // userId={userId}
-                        setServerGoods={setServerGoods}
-                        />} />
-                <Route path="/draft" element={<Draft />} />
-                <Route path="/product/:id" element={<Product/>} />
-                <Route path="/profile" element={<Profile user={user} setUser={setUser} color="yellow" />} />
-            </Routes>
-        </main>
-        <Footer />
-        <Modal
-            active={modalActive}
-            setActive={setModalActive}
-            setUser={setUser}
+            <main>
+                <Search arr={serverGoods} />
+                <Routes>
+                    <Route path="/" element={<Main />} />
+                    <Route path="/catalog"
+                        element={<Catalog />} />
+                    <Route path="/add"
+                        element={<Add />} />
+                    <Route path="/favorites"
+                        element={<Favorites userId={userId} />} />
+                    <Route path="/draft" element={<Draft />} />
+                    <Route path="/product/:id" element={<Product />} />
+                    <Route path="/profile" element={<Profile user={user} setUser={setUser} color="yellow" />} />
+                    <Route path="/basket" element={<Basket/>}/>
+                </Routes>
+            </main>
+            <Footer />
+            <Modal
+                active={modalActive}
+                setActive={setModalActive}
+                setUser={setUser}
             />
-            </Ctx.Provider>
+        </Ctx.Provider>
     </>
 }
 

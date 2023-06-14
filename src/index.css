@@ -14,7 +14,7 @@ a {
   text-decoration: none;
 }
 
-.container {
+.dog_container {
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 20px;
@@ -22,7 +22,7 @@ a {
   box-sizing: border-box; */
 }
 
-.container .search-block {
+.dog_container .search-block {
   grid-column-end: span 4;
 }
 
@@ -39,24 +39,28 @@ main {
   gap: 20px;
 }
 
+.container.bs {
+  display: block;
+}
+
 
 @media (min-width: 720px) and (max-width: 1300px) {
-   .container {
+   .dog_container {
     grid-template-columns: repeat(3,1fr);
    }
 
-   .container .search-block {
+   .dog_container .search-block {
     grid-column-end: span 3;
   }
 }
 
 @media (min-width: 320px) and (max-width: 800px) {
-  .container {
+  .dog_container {
     grid-template-columns: repeat(2,1fr);
     padding: 30px 10px;
    }
 
-   .container .search-block {
+   .dog_container .search-block {
     grid-column-end: span 2;
   }
 

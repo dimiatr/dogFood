@@ -1,22 +1,14 @@
-import { useState } from "react";
-import Search from "../components/Search";
-import Card from "../components/Card";
+import { useContext, useState } from "react";
+
 import { Promo, Banner } from "../components/Promo";
-import cardsData from '../assets/data' ;
+import Ctx from '../context'
 
 const Draft = () => {
-    const [goods, setGoods] = useState(cardsData);
+    const {goods, setGoods, serverGoods} = useContext(Ctx);
+
     return <>
     <Banner/>
-        <div className="container">
-            <Search arr={cardsData} upd={setGoods}/>
-            {goods.map((el, i) => <Card
-            key={i}
-            img={el.pictures}
-            name={el.name}
-            price={el.price}
-            />)}
-        </div>
+     
     <Promo/>
     </>
 }

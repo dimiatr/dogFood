@@ -27,7 +27,7 @@
   font-size: 25px;
 }
 
-button {
+.prod__btn {
   border: none;
   outline: none;
   height: 30px;
@@ -97,6 +97,45 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+table {
+  width: 100%;
+  background-color: white;
+  color: #222;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+td {
+  padding: .6rem 1rem;
+}
+td:first-child {
+  text-align: center;
+}
+thead td {
+  text-align: center;
+  font-weight: bold;
+}
+tbody td {
+  border-bottom: 1px solid silver;
+  text-align: center;
+}
+tfoot td {
+  vertical-align: bottom;
+  line-height: 1;
+}
+tfoot td:first-child {
+  text-align: right;
+  text-transform: uppercase;
+}
+tfoot td:last-child {
+  font-size: 2em;
+  font-weight: bold;
+}
+tfoot del {
+  padding-left: 12px;
+  font-size: .8em;
+  color: silver;
 }
 
 @media (min-width: 720px) and (max-width:1350px) {

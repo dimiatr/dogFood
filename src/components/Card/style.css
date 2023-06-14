@@ -1,4 +1,4 @@
-.card {
+.dog_card {
     padding: 20px;
     display: grid;
     gap: 10px;
@@ -27,6 +27,10 @@
 .card__btn:hover {
     background-color: springgreen;
     color: black;
+}
+
+.card__btn:disabled{
+    opacity: 60%;
 }
 
 .card__discount {

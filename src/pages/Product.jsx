@@ -1,8 +1,8 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import Loader from "../components/Loader";
 import './style.css';
-import { Truck, PatchCheck, ArrowThroughHeartFill, ArrowThroughHeart } from "react-bootstrap-icons";
+import { Truck, PatchCheck, ArrowThroughHeartFill, ArrowThroughHeart, Trash} from "react-bootstrap-icons";
 import Ctx from '../context'
 
 const Product = () => {
@@ -16,7 +16,8 @@ const Product = () => {
     const [showAddReview, setShowAddReview] = useState(false);
     const [showDeleteReview, setShowDeleteReview] = useState(false);
     const [newReview, setNewReview] = useState({ rating: 0, text: "" });
-    const { setServerGoods, userId } = useContext(Ctx);
+    const { setServerGoods, userId, basket, setBasket, api } = useContext(Ctx);
+    const navigate = useNavigate();
 
     const updLike = () => {
         setIsLike(!isLike);
@@ -83,7 +84,7 @@ const Product = () => {
         fetch(`https://api.react-learning.ru/products/review/${id}/${reviewId}`, {
             method: 'DELETE',
             headers: {
-                Authorization: `Bearer ${token}`,
+                'Authorization' : `Bearer ${token}`,
             },
         })
             .then((res) => res.json())
@@ -101,6 +102,14 @@ const Product = () => {
             });
     };
 
+    const del = () => {
+        api.delProduct(id)
+        .then(data => {
+            console.log(data);
+            setServerGoods(prev => prev.filter(el => el._id != id))
+            navigate('/catalog')
+        })
+    }
 
     useEffect(() => {
         if (review.length > 0) {
@@ -111,12 +120,7 @@ const Product = () => {
     }, [review]);
 
     useEffect(() => {
-        fetch(`https://api.react-learning.ru/products/${id}`, {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem('rockToken')}`
-            }
-        })
-            .then(res => res.json())
+        api.getSingleProduct(id)
             .then(data => {
                 if (!data.err)
                     console.log(data);
@@ -146,9 +150,26 @@ const Product = () => {
         localStorage.setItem(`isLike_${id}`, JSON.stringify(isLike));
     }, [isLike, id]);
 
+    const addToBasket = () => {
+  const newItem = {
+    id: product._id, 
+    name: product.name, 
+    price: product.price, 
+    img: product.pictures, 
+    cnt: count, 
+    discount: product.discount, 
+  };
+
+  setBasket((prevBasket) => [...prevBasket, newItem]);
+};
+
+
+
     return <>
         <div>
-            <button><Link to='/catalog'>вернуться назад</Link></button>
+            <button className="prod__btn"><Link to='/catalog'>вернуться назад</Link></button>
+            &nbsp;
+            {userId === product.author?._id && <button className="prod__btn" onClick={del}>Удалить товар <Trash/></button>}
         </div>
         {product.name ? <>
             <div className="main__container">
@@ -166,9 +187,9 @@ const Product = () => {
                                 <span className="main__twoblock_counts" >{count}</span>
                                 <span className="main__twoblock_countplus" onClick={() => setCount(count + 1)}>+</span>
                             </button>
-                            <button>в корзину</button>
+                            <button className="prod__btn" onClick={addToBasket} >в корзину</button>
                         </div>
-                        <button onClick={updLike}>{isLike ? <ArrowThroughHeartFill /> : <ArrowThroughHeart />} в избранное</button>
+                        <button className="prod__btn" onClick={updLike}>{isLike ? <ArrowThroughHeartFill /> : <ArrowThroughHeart />} в избранное</button>
                         <div className="main__delivery">
                             <h3><span><Truck /> &nbsp;</span> Доставка по всему миру</h3>
                             <p>Доставка курьером от 399 рублей</p>
@@ -182,9 +203,9 @@ const Product = () => {
                 </div>
                 <div className="main__review">
                     <div className="h1">Отзывы {review.length}</div>
-                    <button onClick={addReview}>Написать отзыв</button>
+                    <button className="prod__btn" onClick={addReview}>Написать отзыв</button>
                     &nbsp;
-                    <button onClick={deleteReview}>Удалить отзыв</button>
+                    <button className="prod__btn" onClick={deleteReview}>Удалить отзыв</button>
                     <div className="main__review_content">
                         {displayedReviews.map((review) => (
                             <div className="main__reviews" key={review._id}>
@@ -198,7 +219,7 @@ const Product = () => {
                         ))}
                     </div>
                     {review.length > 0 && !showReviews && (
-                        <button onClick={() => setShowReviews(true)}>Посмотреть все отзывы</button>
+                        <button className="prod__btn" onClick={() => setShowReviews(true)}>Посмотреть все отзывы</button>
                     )}
                 </div>
                 {showAddReview && (
@@ -212,7 +233,7 @@ const Product = () => {
                             <label>Текст отзыва:</label>
                             <textarea value={newReview.text} onChange={textChange} />
                         </div>
-                        <button onClick={submitReview}>Отправить отзыв</button>
+                        <button className="prod__btn" onClick={submitReview}>Отправить отзыв</button>
                     </div>
                 )}
             </div>
