@@ -1,6 +1,7 @@
 {
   "name": "dogfood",
   "version": "0.1.0",
+  "homepage": "https://dimiatr.github.io/dogFood/",
   "dependencies": {
     "@trendyol-js/react-carousel": "^3.0.2",
     "better-react-carousel": "^1.1.1",
