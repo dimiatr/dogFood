@@ -109,7 +109,7 @@ const App = () => {
             <main>
                 <Search arr={serverGoods} />
                 <Routes>
-                    <Route path="/" element={<Main />} />
+                    <Route path="/" element={<Main/>} />
                     <Route path="/catalog"
                         element={<Catalog />} />
                     <Route path="/add"

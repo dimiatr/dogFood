@@ -18,7 +18,7 @@ const Footer = () => {
             <Link to={'/'}>
                 <Cart4/>
             </Link>
-            <Link to='/draft'>Старый код</Link>
+            {/* <Link to='/draft'>Старый код</Link> */}
         </div>
     </footer>
 }
