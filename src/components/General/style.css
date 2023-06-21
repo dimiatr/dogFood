@@ -1,16 +1,21 @@
-.logo {
+.container__logo {
     display: grid;
     gap: 4px;
     justify-content: center;
     justify-items: center;
     text-align: center;
 }
+
+.logo {
+    border-radius: 10px;
+}
+
 .logo img {
     height: 50px;
 }
 
 header {
-    background-color: silver;
+    background-color: rgb(226, 230, 49);
     color: #000;
     display: flex;
     align-items: center;
@@ -25,13 +30,14 @@ header {
 footer {
     display: flex;
     padding: 20px;
-    background-color: silver;
+    background-color: rgb(226, 230, 49);
     color: #000;
 }
 
 .footer__cell {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     width: 50%;
 }
 

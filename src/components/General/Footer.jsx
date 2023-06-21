@@ -6,16 +6,16 @@ const Footer = () => {
     return <footer>
         <div className="footer__cell">
             <Logo/>
-            <h3>©️ {new Date().getFullYear()}</h3>
+            <h5>©️ {new Date().getFullYear()}</h5>
         </div>
         <div className="footer__menu">
             <Link to={'/catalog'}>
                 <Folder2/>
             </Link>
-            <Link to={'/'}>
+            <Link to={'/favorites'}>
                 <Star/>
             </Link>
-            <Link to={'/'}>
+            <Link to={'/basket'}>
                 <Cart4/>
             </Link>
             {/* <Link to='/draft'>Старый код</Link> */}

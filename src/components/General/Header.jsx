@@ -1,5 +1,6 @@
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
+import Search from '../Search';
 import { Folder2, Star, Cart4, PersonCircle, BoxArrowInRight, PlusSquare } from "react-bootstrap-icons";
 import { useState, useEffect, useContext } from 'react';
 import Ctx from '../../context'
@@ -23,7 +24,9 @@ const Header = ({ user, setModalActive }) => {
     }
     return <header>
         <Logo />
-        <div className="search"></div>
+        <div className="search">
+            <Search/>
+        </div>
         <nav className="header__menu">
             {user && <>
                 <Link to='/add' title='Добавить товар' className='badge-el'>

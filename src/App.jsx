@@ -7,7 +7,6 @@ import Api from "./components/api";
 
 import { Header, Footer } from "./components/General";
 import Modal from './components/Modal';
-import Search from "./components/Search";
 
 import Draft from "./pages/Draft";
 import Main from "./pages/Main";
@@ -93,7 +92,6 @@ const App = () => {
         news,
         text,
         setText,
-        userId,
         token,
         api,
         basket,
@@ -107,7 +105,7 @@ const App = () => {
                 setModalActive={setModalActive}
             />
             <main>
-                <Search arr={serverGoods} />
+                {/* <Search arr={serverGoods} /> */}
                 <Routes>
                     <Route path="/" element={<Main/>} />
                     <Route path="/catalog"
