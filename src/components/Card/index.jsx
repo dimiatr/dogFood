@@ -60,7 +60,11 @@ const Card = ({ img, name, price, _id, discount, tags, likes}) => {
                 &nbsp; р</span>
             <button className="card__btn" onClick={addToCart} disabled={inBasket}>В корзину</button>
             <span className="card__tags">
-                {tags?.map(el => <span key={el}>{el}</span>)}
+                {tags?.map(el => <span key={el} style={{
+                    background: 'green',
+                    padding: '4px',
+                    borderRadius: '4px',
+                }}>{el}</span>)}
             </span>
         </Link>
     )

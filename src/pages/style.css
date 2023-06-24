@@ -78,7 +78,7 @@ button:hover {
 .main__delivery, .main__quality {
   background-color: silver;
   color: darkblue;
-  padding: 20px;
+  padding: 7px;
   width: 400px;
   border-radius: 5px;
   margin: 10px 0;
@@ -104,6 +104,20 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.main__addreview {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.main__rate, .main__textreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 table {
@@ -144,6 +158,8 @@ tfoot del {
   font-size: .8em;
   color: silver;
 }
+
+
 
 @media (min-width: 720px) and (max-width:1350px) {
 

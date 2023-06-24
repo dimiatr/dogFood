@@ -10,13 +10,19 @@ const Footer = () => {
         </div>
         <div className="footer__menu">
             <Link to={'/catalog'}>
-                <Folder2/>
+                <Folder2 style={{
+            color: 'white'
+        }}/>
             </Link>
             <Link to={'/favorites'}>
-                <Star/>
+                <Star style={{
+            color: 'white'
+        }}/>
             </Link>
             <Link to={'/basket'}>
-                <Cart4/>
+                <Cart4 style={{
+            color: 'white'
+        }}/>
             </Link>
             {/* <Link to='/draft'>Старый код</Link> */}
         </div>

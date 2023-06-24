@@ -29,27 +29,39 @@ const Header = ({ user, setModalActive }) => {
         </div>
         <nav className="header__menu">
             {user && <>
-                <Link to='/add' title='Добавить товар' className='badge-el'>
-                    <PlusSquare/>
+                <Link to='/add' title='Добавить товар' className='el'>
+                    <PlusSquare style={{
+            color: 'white'
+        }}/>
                 </Link>
                 <Link to="/catalog" title='каталог'>
-                    <Folder2 />
+                    <Folder2 style={{
+            color: 'white'
+        }}/>
                 </Link>
-                <Link to="/favorites" title='избранное' className='badge-el'>
-                    <Star />
-                    <span className='badge-item'>{likeCnt}</span>
+                <Link to="/favorites" title='избранное' className='el'>
+                    <Star style={{
+            color: 'white'
+        }}/>
+                    <span className='item'>{likeCnt}</span>
                 </Link>
-                <Link to="/basket" title='корзина' className='badge-el'>
-                    <Cart4 />
-                    <span className='badge-item'>{cartCnt}</span>
+                <Link to="/basket" title='корзина' className='el'>
+                    <Cart4 style={{
+            color: 'white'
+        }}/>
+                    <span className='item'>{cartCnt}</span>
                 </Link>
                 <Link to="/profile" title='профиль'>
-                    <PersonCircle />
+                    <PersonCircle style={{
+            color: 'white'
+        }}/>
                 </Link>
 
             </>}
             {!user && <a href="" onClick={logIn} title='Войти'>
-                <BoxArrowInRight />
+                <BoxArrowInRight style={{
+            color: 'white'
+        }}/>
             </a>}
         </nav>
     </header>

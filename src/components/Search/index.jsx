@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { SearchHeart } from 'react-bootstrap-icons';
 import Ctx from '../../context'
 import './style.css'
 
@@ -35,8 +36,9 @@ const Search = () => {
     }
 
     return <div className="search-block">
-        <input type="search" className='search' placeholder='введите слово' value={text} onChange={searchByText} />
-        <button className="prod__btn" onClick={click}>поиск</button>
+        <input type="search" className='searchinp' placeholder='введите слово' value={text} onChange={searchByText} />
+        &nbsp; <SearchHeart />
+        {/* <button className="prod__btn" onClick={click}>поиск</button> */}
         {/* <hr /> */}
         {/* <div>По вашему запросу {text} найжено {qauntity} подходящих товаров</div> */}
     </div>

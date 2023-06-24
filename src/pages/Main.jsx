@@ -4,7 +4,6 @@ import Favorites from "./Favorites";
 
 const Main = () => {
     return <>
-        <h1>Главная страница</h1>
         <Banner/>
         <Favorites/>
         <Promo/>

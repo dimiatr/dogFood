@@ -54,3 +54,10 @@
     align-items: center;
     cursor: pointer;
 }
+
+.card__tags {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: white;
+}

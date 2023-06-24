@@ -4,6 +4,7 @@
     justify-content: center;
     justify-items: center;
     text-align: center;
+    color: white;
 }
 
 .logo {
@@ -15,7 +16,7 @@
 }
 
 header {
-    background-color: rgb(226, 230, 49);
+    background-color: #6D398B;
     color: #000;
     display: flex;
     align-items: center;
@@ -30,7 +31,7 @@ header {
 footer {
     display: flex;
     padding: 20px;
-    background-color: rgb(226, 230, 49);
+    background-color: #6D398B;
     color: #000;
 }
 
@@ -39,6 +40,7 @@ footer {
     flex-direction: column;
     align-items: flex-start;
     width: 50%;
+    color: white;
 }
 
 .footer__menu {
@@ -49,23 +51,24 @@ footer {
     gap: 30px;
 }
 
-.badge-el {
+.el {
     position: relative;
 }
 
-.badge-item {
+.item {
     display: flex;
     position: absolute;
     align-items: center;
     justify-content: center;
-    background-color: rgba(105, 90, 205, 0.404);
-    color: white;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     height: 16px;
     width: 16px;
     border-radius: 50%;
     font-size: .75em;
-    top: -50%;
-    right: -50%;
+    top: -30%;
+    right: -65%;
+    padding: 3px;
 }
 
 @media (min-width: 320px) and (max-width: 720px) {

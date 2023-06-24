@@ -34,14 +34,26 @@ const Catalog = () => {
     return <div className="dog_container">
         <div style={{gridColumnEnd: 'span 4'}}><Pagination hk={paginate}/></div>
         <div style={filterSt}>
-            <button style={{background: sort === 'up'? 'orange': 'white'}}
+            <button style={{
+                background: sort === 'up'? '#6D398B': 'white',
+                borderRadius: '4px',
+                border: 'none',
+                color: sort === 'up'? 'white': 'black',
+                padding: '0 10px'
+            }}
             onClick={() => sortHandler('up')}
             >по возрастанию цены</button>
-            <button style={{background: sort === 'down'? 'orange': 'white'}}
+            <button style={{
+                background: sort === 'down'? '#6D398B': 'white',
+                borderRadius: '4px',
+                border: 'none',
+                color: sort === 'down'? 'white': 'black',
+                padding: '0 10px'
+            }}
             onClick={() => sortHandler('down')}
             >по убыванию цены</button>
-            <button>Новинки</button>
-            <button>Скидки</button>
+            {/* <button>Новинки</button>
+            <button>Скидки</button> */}
         </div>
         {paginate.setDataPerPage().map(g => <Card key={g._id} {...g} img={g.pictures} setServerGoods={setServerGoods}/>)}
     </div>
