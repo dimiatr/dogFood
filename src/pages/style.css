@@ -76,7 +76,7 @@ button:hover {
 }
 
 .main__delivery, .main__quality {
-  background-color: silver;
+  background-color: rgb(255, 255, 255);
   color: darkblue;
   padding: 7px;
   width: 400px;
@@ -120,6 +120,18 @@ button:hover {
   padding-bottom: 10px;
 }
 
+.basket__container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.count__min, .count__plus {
+  padding: 0 3px;
+  border: 4px;
+  outline: none;
+  font-weight: bold;
+}
+
 table {
   width: 100%;
   background-color: white;
@@ -127,6 +139,12 @@ table {
   border-radius: 1rem;
   overflow: hidden;
 }
+
+thead {
+  background-color: #6D398B;
+  color: white;
+}
+
 td {
   padding: .6rem 1rem;
 }
@@ -135,7 +153,7 @@ td:first-child {
 }
 thead td {
   text-align: center;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 tbody td {
   border-bottom: 1px solid silver;
@@ -148,10 +166,11 @@ tfoot td {
 tfoot td:first-child {
   text-align: right;
   text-transform: uppercase;
+  font-weight: bold;
 }
 tfoot td:last-child {
   font-size: 2em;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 tfoot del {
   padding-left: 12px;

@@ -1,7 +1,7 @@
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import Loader from "../components/Loader";
-import { Truck, PatchCheck, ArrowThroughHeartFill, ArrowThroughHeart, Trash} from "react-bootstrap-icons";
+import { Truck, PatchCheck, ArrowThroughHeartFill, ArrowThroughHeart, Trash } from "react-bootstrap-icons";
 import Ctx from '../context'
 import './style.css';
 
@@ -16,7 +16,7 @@ const Product = () => {
     const [showAddReview, setShowAddReview] = useState(false);
     const [showDeleteReview, setShowDeleteReview] = useState(false);
     const [newReview, setNewReview] = useState({ rating: 1, text: "" });
-    const { setServerGoods, userId, basket, setBasket, api } = useContext(Ctx);
+    const { setServerGoods, userId, setBasket, api } = useContext(Ctx);
     const navigate = useNavigate();
 
     const updLike = () => {
@@ -58,19 +58,20 @@ const Product = () => {
             })
     }
 
-    const deleteReview = () => {
+    const deleteReview = (reviewId) => {
         const userReview = userId && review.find(r => r.author._id === userId);
         if (!userReview) {
             return;
         }
-        const reviewId = userReview._id;
+        console.log(reviewId)
         api.delReview(id, reviewId)
             .then((data) => {
                 console.log(data);
-                setShowDeleteReview(true);
                 localStorage.removeItem(`review_${reviewId}`);
                 const updatedReviews = review.filter(r => r._id !== reviewId);
                 setReview(updatedReviews);
+                const userReviewExists = updatedReviews.find((r) => r.author._id === userId);
+                setShowDeleteReview(userReviewExists ? true : false);
             })
             .catch((error) => {
                 console.error('Error deleting review:', error);
@@ -79,11 +80,11 @@ const Product = () => {
 
     const del = () => {
         api.delProduct(id)
-        .then(data => {
-            console.log(data);
-            setServerGoods(prev => prev.filter(el => el._id != id))
-            navigate('/catalog')
-        })
+            .then(data => {
+                console.log(data);
+                setServerGoods(prev => prev.filter(el => el._id != id))
+                navigate('/catalog')
+            })
     }
 
     useEffect(() => {
@@ -104,6 +105,7 @@ const Product = () => {
     }, [id]);
 
     useEffect(() => {
+        const userReview = userId && review.find(r => r.author._id === userId);
         fetch(`https://api.react-learning.ru/products/review/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('rockToken')}`,
@@ -113,6 +115,8 @@ const Product = () => {
             .then((data) => {
                 if (!data.err) console.log(data);
                 setReview(data);
+                setShowDeleteReview(userReview ? true : false)
+                console.log(userReview)
                 console.log(data)
             });
     }, [id]);
@@ -126,17 +130,17 @@ const Product = () => {
     }, [isLike, id]);
 
     const addToBasket = () => {
-  const newItem = {
-    id: product._id, 
-    name: product.name, 
-    price: product.price, 
-    img: product.pictures, 
-    cnt: count + 1, 
-    discount: product.discount, 
-  };
+        const newItem = {
+            id: product._id,
+            name: product.name,
+            price: product.price,
+            img: product.pictures,
+            cnt: count + 1,
+            discount: product.discount,
+        };
 
-  setBasket((prevBasket) => [...prevBasket, newItem]);
-};
+        setBasket((prevBasket) => [...prevBasket, newItem]);
+    };
 
 
 
@@ -144,7 +148,7 @@ const Product = () => {
         <div>
             <button className="prod__btn"><Link to='/catalog'>вернуться назад</Link></button>
             &nbsp;
-            {userId === product.author?._id && <button className="prod__btn" onClick={del}>Удалить товар <Trash/></button>}
+            {userId === product.author?._id && <button className="prod__btn" onClick={del}>Удалить товар <Trash /></button>}
         </div>
         {product.name ? <>
             <div className="main__container">
@@ -167,7 +171,7 @@ const Product = () => {
                         <button className="prod__btn" onClick={updLike}>{isLike ? <ArrowThroughHeartFill /> : <ArrowThroughHeart />} в избранное</button>
                         <div className="main__delivery">
                             <h3><span><Truck /> &nbsp;</span> Доставка миру</h3>
-                            <p>Доставка курьером от 399 рублей <br/> Доставка в пункт выдачи 199 рублей</p>
+                            <p>Доставка курьером от 399 рублей <br /> Доставка в пункт выдачи 199 рублей</p>
                         </div>
                         <div className="main__quality">
                             <h3><span><PatchCheck /> &nbsp;</span> Гарантия качества</h3>
@@ -178,8 +182,6 @@ const Product = () => {
                 <div className="main__review">
                     <div className="h1">Отзывы {review.length}</div>
                     <button className="prod__btn" onClick={addReview}>Написать отзыв</button>
-                    &nbsp;
-                    <button className="prod__btn" onClick={deleteReview}>Удалить отзыв</button>
                     <div className="main__review_content">
                         {displayedReviews && displayedReviews.map((review) => (
                             <div className="main__reviews" key={review._id}>
@@ -188,6 +190,10 @@ const Product = () => {
                                     <div >{review.author.name}</div>
                                     <div >Рейтинг: {review.rating}</div>
                                     <div >{review.text}</div>
+                                    {/* {showDeleteReview && <span className="prod__btn" onClick={deleteReview}>Удалить отзыв</span>} */}
+                                    {review.author._id === userId && (
+                                        <button className="prod__btn" onClick={() => deleteReview(review._id)}>Удалить отзыв</button>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -204,14 +210,14 @@ const Product = () => {
                             <input type="number" min="1" max="5" value={newReview.rating} onChange={ratingChange} style={{
                                 border: 'none',
                                 borderRadius: '4px',
-                            }}/>
+                            }} />
                         </div>
                         <div className="main__textreview">
                             <div>Текст отзыва:</div>
                             <textarea value={newReview.text} onChange={textChange} style={{
                                 border: 'none',
                                 borderRadius: '4px',
-                            }}/>
+                            }} />
                         </div>
                         <button className="prod__btn" onClick={submitReview}>Отправить отзыв</button>
                     </div>
